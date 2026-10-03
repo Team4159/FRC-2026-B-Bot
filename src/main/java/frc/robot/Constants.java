@@ -7,6 +7,7 @@ package frc.robot;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 /**
@@ -28,9 +29,11 @@ public final class Constants {
     public static final int ANGLE_ENCODER_ID = 1;
 
     public static final CANcoderConfiguration ANGLE_CAN_CODER_CONFIG = new CANcoderConfiguration();
-    public static final TalonFXConfiguration ANGLE_CONFIG = new TalonFXConfiguration();
+    public static final TalonFXConfiguration ANGLE_CONFIG = new TalonFXConfiguration() {{
+      MotorOutput.withNeutralMode(NeutralModeValue.Brake);
+    }};
 
-    public static final double ANGLE_KP = 10;
+    public static final double ANGLE_KP = 1;
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0;
 
@@ -65,7 +68,7 @@ public final class Constants {
     public static final int FEEDER_MOTOR_ID = 14;
 
     public static final double FLYWHEEL_SPEED = 50;
-    public static final double FEEDER_SPEED = 30;
+    public static final double FEEDER_SPEED = 0.5;
 
     public static final double FLYWHEEL_KP = 0.1;
     public static final double FLYWHEEL_KI = 0;

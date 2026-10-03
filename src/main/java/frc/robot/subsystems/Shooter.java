@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -17,7 +19,7 @@ public class Shooter extends SubsystemBase{
     private final VelocityVoltage flywheel_request = new VelocityVoltage(0);
 
     //im not sure if the velocity is correct, plz change the double
-    private final VelocityVoltage feeder_request = new VelocityVoltage(0);
+    private final DutyCycleOut feeder_request = new DutyCycleOut(0);
 
 
 
@@ -29,10 +31,14 @@ public class Shooter extends SubsystemBase{
 
         feederMotor = new TalonFX(ShooterConstants.FEEDER_MOTOR_ID); 
 
-        flywheelTopLeftMotor.getConfigurator().apply(ShooterConstants.FLYWHEEL_CONFIG);
-        flywheelBottomLeftMotor.getConfigurator().apply(ShooterConstants.FLYWHEEL_CONFIG);
+        TalonFXConfiguration LEFT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
+        LEFT_CONFIG.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
+
+        flywheelTopLeftMotor.getConfigurator().apply(LEFT_CONFIG);
+        flywheelBottomLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelTopRightMotor.getConfigurator().apply(ShooterConstants.FLYWHEEL_CONFIG);
         flywheelBottomRightMotor.getConfigurator().apply(ShooterConstants.FLYWHEEL_CONFIG);
+
 
     }
 
@@ -50,7 +56,7 @@ public class Shooter extends SubsystemBase{
     }
 
     public void runFeeder(){
-        feederMotor.setControl(feeder_request.withVelocity(ShooterConstants.FEEDER_SPEED));
+        feederMotor.setControl(feeder_request.withOutput(ShooterConstants.FEEDER_SPEED));
     }
     public void stopFeeder(){
         feederMotor.stopMotor();
