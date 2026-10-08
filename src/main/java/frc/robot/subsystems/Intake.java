@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase{
     private final DutyCycleOut roller_request = new DutyCycleOut(0);
 
     public Intake(){
-        angleMotor = new TalonFX(IntakeConstants.ANGLE_ENCODER_ID);
+        angleMotor = new TalonFX(IntakeConstants.ANGLE_MOTOR_ID);
         spinMotor = new TalonFX(IntakeConstants.SPIN_MOTOR_ID);
         angleEncoder = new CANcoder(IntakeConstants.ANGLE_ENCODER_ID);
 
@@ -40,7 +40,7 @@ public class Intake extends SubsystemBase{
     public void setDown(){
         setAngle(IntakeConstants.ANGLE_DOWN);
     }
-    public void setUP(){
+    public void setUp(){
         setAngle(IntakeConstants.ANGLE_UP);
     }
 
@@ -48,7 +48,7 @@ public class Intake extends SubsystemBase{
     public void runRollers(){
         spinMotor.setControl(roller_request.withOutput(IntakeConstants.ROLLER_SPEED));
     }
-    public void reverseRollers(){
+    public void runReverseRollers(){
         spinMotor.setControl(roller_request.withOutput(-IntakeConstants.ROLLER_SPEED));
     }
     public void stopRollers(){
@@ -57,19 +57,18 @@ public class Intake extends SubsystemBase{
 
     public void setState(IntakeState state){
         switch (state) {
-            case DOWN_ON:
+            case INTAKE_DOWN:
                 setDown();
                 runRollers();
                 break;
-
-            case DOWN_OFF:
-                setDown();
+            
+            case INTAKE_UP:
+                setUp();
                 stopRollers();
                 break;
-            
-            case UP_OFF:
-                setUP();
-                stopRollers();
+
+            case OUTTAKE:
+                runReverseRollers(); ///not used in container yet
                 break;
         }
     }

@@ -9,11 +9,13 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 //subsis :D
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,6 +32,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain(m_driverController);
   private final Intake m_intake = new Intake();
+  private final Shooter m_shooter = new Shooter();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,22 +58,45 @@ public class RobotContainer {
     // // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    m_driverController.y().onTrue(m_drivetrain.zeroDirectionCommand());
-    m_driverController.a().onTrue(
-      new InstantCommand(
-        () -> m_intake.setState(IntakeState.DOWN_ON)
+
+    //drivetrain
+    m_driverController.back().onTrue(m_drivetrain.zeroDirectionCommand());
+    m_driverController.leftTrigger().whileTrue(
+      new RunCommand(
+        () -> m_drivetrain.setSlowMode(true),
+        m_drivetrain
+      ).finallyDo(
+        () -> m_drivetrain.setSlowMode(false)
       )
     );
-    m_driverController.b().onTrue(
-      new InstantCommand(
-        () -> m_intake.setState(IntakeState.DOWN_OFF)
+
+    //Intake
+    m_driverController.leftBumper().whileTrue(
+      new RunCommand(
+        () -> m_intake.setState(IntakeState.INTAKE_DOWN),
+        m_intake
+      ).finallyDo(
+        () -> m_intake.setState(IntakeState.INTAKE_UP)
       )
     );
-    m_driverController.x().onTrue(
-      new InstantCommand(
-        () -> m_intake.setState(IntakeState.UP_OFF)
-      )
+    //outtake not used yet
+
+    //shoota (temporary bc no limelight yet)
+    m_driverController.rightBumper().whileTrue(
+      new RunCommand(
+        m_shooter::runFeeder,
+        m_shooter
+      ).finallyDo(m_shooter::stopFeeder)
     );
+    m_driverController.rightTrigger().whileTrue(
+      new RunCommand(
+        m_shooter::runFlywheel,
+        m_shooter
+      ).finallyDo(m_shooter::stopFlywheel)
+    );
+    //run reverse feeder not used yet
+
+    //configure bindings   - ---- left off here 14:58 
   }
 
   /**

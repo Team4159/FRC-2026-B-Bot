@@ -20,6 +20,8 @@ public class Drivetrain extends CommandSwerveDrivetrain{
     private final Supplier<Double> inputY; 
     private final Supplier<Double> inputRotation;
 
+    private double speedMultiplier = 1.0;
+
     public Drivetrain(CommandXboxController controller){
         super(
             TunerConstants.DrivetrainConstants,
@@ -34,11 +36,13 @@ public class Drivetrain extends CommandSwerveDrivetrain{
         this.inputRotation = () -> -controller.getRightX();
     }
 
+    public void setSlowMode(boolean slow){speedMultiplier = slow ? 0.5 : 1.0;}
+
     public Command driveCommand() {
         return run(() -> {
-            setControl(fieldCentricDrive.withVelocityX(inputX.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude())
-                .withVelocityY(inputY.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude())
-                .withRotationalRate(inputRotation.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude()));
+            setControl(fieldCentricDrive.withVelocityX(inputX.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
+                .withVelocityY(inputY.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
+                .withRotationalRate(inputRotation.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier));
         });
     }
 

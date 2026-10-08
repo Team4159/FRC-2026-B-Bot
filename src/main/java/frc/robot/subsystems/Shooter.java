@@ -34,10 +34,13 @@ public class Shooter extends SubsystemBase{
         TalonFXConfiguration LEFT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
         LEFT_CONFIG.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
 
+        TalonFXConfiguration RIGHT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
+        RIGHT_CONFIG.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);
+
         flywheelTopLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelBottomLeftMotor.getConfigurator().apply(LEFT_CONFIG);
-        flywheelTopRightMotor.getConfigurator().apply(ShooterConstants.FLYWHEEL_CONFIG);
-        flywheelBottomRightMotor.getConfigurator().apply(ShooterConstants.FLYWHEEL_CONFIG);
+        flywheelTopRightMotor.getConfigurator().apply(RIGHT_CONFIG);
+        flywheelBottomRightMotor.getConfigurator().apply(RIGHT_CONFIG);
 
 
     }
@@ -57,6 +60,9 @@ public class Shooter extends SubsystemBase{
 
     public void runFeeder(){
         feederMotor.setControl(feeder_request.withOutput(ShooterConstants.FEEDER_SPEED));
+    }
+    public void runRevereseFeeder(){
+        feederMotor.setControl(feeder_request.withOutput(-ShooterConstants.FEEDER_SPEED));
     }
     public void stopFeeder(){
         feederMotor.stopMotor();

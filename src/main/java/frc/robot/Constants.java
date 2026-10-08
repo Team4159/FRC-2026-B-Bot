@@ -43,9 +43,9 @@ public final class Constants {
     public static final double ROLLER_SPEED = 0.5; //test val
     
     public enum IntakeState {
-      DOWN_ON,
-      DOWN_OFF,
-      UP_OFF
+      INTAKE_DOWN,
+      INTAKE_UP,
+      OUTTAKE
     }
 
     static{
@@ -66,6 +66,7 @@ public final class Constants {
     public static final int FLYWHEEL_MOTOR_BOTTOM_RIGHT_ID = 13;
 
     public static final int FEEDER_MOTOR_ID = 14;
+
 
     public static final double FLYWHEEL_SPEED = 50;
     public static final double FEEDER_SPEED = 0.5;
