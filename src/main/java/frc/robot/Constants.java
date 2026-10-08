@@ -44,8 +44,8 @@ public final class Constants {
     
     public enum IntakeState {
       INTAKE_DOWN,
-      INTAKE_UP,
-      OUTTAKE
+      INTAKE_UP
+      // OUTTAKE
     }
 
     static{

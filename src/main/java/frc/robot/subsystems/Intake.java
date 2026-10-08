@@ -20,6 +20,8 @@ public class Intake extends SubsystemBase{
 
     private final DutyCycleOut roller_request = new DutyCycleOut(0);
 
+    private int rollerDirection = 1;
+
     public Intake(){
         angleMotor = new TalonFX(IntakeConstants.ANGLE_MOTOR_ID);
         spinMotor = new TalonFX(IntakeConstants.SPIN_MOTOR_ID);
@@ -44,12 +46,11 @@ public class Intake extends SubsystemBase{
         setAngle(IntakeConstants.ANGLE_UP);
     }
 
+    public void setReverseRoller(boolean reverse){rollerDirection = reverse ? -1 : 1;}
+
     //roller kraken x60
     public void runRollers(){
-        spinMotor.setControl(roller_request.withOutput(IntakeConstants.ROLLER_SPEED));
-    }
-    public void runReverseRollers(){
-        spinMotor.setControl(roller_request.withOutput(-IntakeConstants.ROLLER_SPEED));
+        spinMotor.setControl(roller_request.withOutput(IntakeConstants.ROLLER_SPEED * rollerDirection));
     }
     public void stopRollers(){
         spinMotor.setControl(roller_request.withOutput(0));
@@ -67,9 +68,9 @@ public class Intake extends SubsystemBase{
                 stopRollers();
                 break;
 
-            case OUTTAKE:
-                runReverseRollers(); ///not used in container yet
-                break;
+            // case OUTTAKE:
+            //     runReverseRollers(); ///not used in container yet
+            //     break;
         }
     }
 

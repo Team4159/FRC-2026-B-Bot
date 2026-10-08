@@ -79,6 +79,14 @@ public class RobotContainer {
         () -> m_intake.setState(IntakeState.INTAKE_UP)
       )
     );
+    m_driverController.x().whileTrue(
+      new RunCommand(
+        () -> m_intake.setReverseRoller(true),
+        m_intake
+      ).finallyDo(
+        () -> m_intake.setReverseRoller(false)
+      )
+    );
     //outtake not used yet
 
     //shoota (temporary bc no limelight yet)
