@@ -96,6 +96,12 @@ public class RobotContainer {
         m_shooter
       ).finallyDo(m_shooter::stopFeeder)
     );
+    m_driverController.b().whileTrue(
+      new RunCommand(
+        m_shooter::runRevereseFeeder,
+        m_shooter
+      ).finallyDo(m_shooter::stopFeeder)
+    );
     m_driverController.rightTrigger().whileTrue(
       new RunCommand(
         m_shooter::runFlywheel,
