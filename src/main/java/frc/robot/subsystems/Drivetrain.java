@@ -13,11 +13,10 @@ import com.ctre.phoenix6.swerve.SwerveRequest.ForwardPerspectiveValue;
 
 public class Drivetrain extends CommandSwerveDrivetrain{
     public final SwerveRequest.FieldCentric fieldCentricDrive = new SwerveRequest.FieldCentric()
-        .withForwardPerspective(ForwardPerspectiveValue.BlueAlliance)
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
     private final Supplier<Double> inputX;
-    private final Supplier<Double> inputY; 
+    private final Supplier<Double> inputY;
     private final Supplier<Double> inputRotation;
 
     private double speedMultiplier = 1.0;
