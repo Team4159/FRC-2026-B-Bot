@@ -59,12 +59,10 @@ public class Intake extends SubsystemBase{
     public void setState(IntakeState state){
         switch (state) {
             case INTAKE_DOWN:
-                setDown();
                 runRollers();
                 break;
             
             case INTAKE_UP:
-                setUp();
                 stopRollers();
                 break;
 
