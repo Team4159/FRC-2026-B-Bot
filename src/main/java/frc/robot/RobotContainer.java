@@ -6,9 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.IntakeConstants.IntakeState;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
@@ -92,8 +90,7 @@ public class RobotContainer {
     //shoota (temporary bc no limelight yet)
     m_driverController.rightBumper().whileTrue(
       new RunCommand(
-        m_shooter::runFeeder,
-        m_shooter
+        m_shooter::runFeeder
       ).finallyDo(m_shooter::stopFeeder)
     );
     m_driverController.b().whileTrue(
@@ -110,7 +107,7 @@ public class RobotContainer {
     );
     //run reverse feeder not used yet
 
-    //configure bindings   - ---- left off here 14:58 
+    //configure bindings   - ---- left off here 14:58
   }
 
   /**

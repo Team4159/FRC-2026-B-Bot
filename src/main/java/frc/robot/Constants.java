@@ -38,10 +38,10 @@ public final class Constants {
     public static final double ANGLE_KD = 0;
 
     public static final double ANGLE_DOWN = 0.0; //place holder plz read dashboard and get down intake angle ;-;
-    public static final double ANGLE_UP = 0.25; //idk man, plz read dashboard, i dont have bot w me... 
+    public static final double ANGLE_UP = 0.25; //idk man, plz read dashboard, i dont have bot w me...
 
-    public static final double ROLLER_SPEED = 0.5; //test val
-    
+    public static final double ROLLER_SPEED = 1.0;
+
     public enum IntakeState {
       INTAKE_DOWN,
       INTAKE_UP
@@ -69,7 +69,7 @@ public final class Constants {
 
 
     public static final double FLYWHEEL_SPEED = 50;
-    public static final double FEEDER_SPEED = -0.5;
+    public static final double FEEDER_SPEED = 1.0;
 
     public static final double FLYWHEEL_KP = 0.1;
     public static final double FLYWHEEL_KI = 0;
@@ -79,9 +79,10 @@ public final class Constants {
       new TalonFXConfiguration();
 
     static {
-      FLYWHEEL_CONFIG.Slot0.kP = FLYWHEEL_KP;
-      FLYWHEEL_CONFIG.Slot0.kI = FLYWHEEL_KI;
-      FLYWHEEL_CONFIG.Slot0.kD = FLYWHEEL_KD;
+      FLYWHEEL_CONFIG.Slot0.kP = 0.5;
+      FLYWHEEL_CONFIG.Slot0.kI = 0.0;
+      FLYWHEEL_CONFIG.Slot0.kD = 0.0;
+      FLYWHEEL_CONFIG.Slot0.kV = 0.1;
     }
   }
 }

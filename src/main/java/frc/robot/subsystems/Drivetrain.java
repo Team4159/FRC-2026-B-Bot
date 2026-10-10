@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.generated.CommandSwerveDrivetrain;
@@ -9,11 +8,12 @@ import java.util.function.Supplier;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-import com.ctre.phoenix6.swerve.SwerveRequest.ForwardPerspectiveValue;
 
 public class Drivetrain extends CommandSwerveDrivetrain{
     public final SwerveRequest.FieldCentric fieldCentricDrive = new SwerveRequest.FieldCentric()
-        .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
+        .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
+        .withDeadband(TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * 0.1)
+        .withRotationalDeadband(0.1);
 
     private final Supplier<Double> inputX;
     private final Supplier<Double> inputY;
