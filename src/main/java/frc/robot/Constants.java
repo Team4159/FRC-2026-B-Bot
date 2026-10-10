@@ -68,7 +68,7 @@ public final class Constants {
     public static final int FEEDER_MOTOR_ID = 14;
 
 
-    public static final double FLYWHEEL_SPEED = 50;
+    public static final double FLYWHEEL_SPEED = 100.0;
     public static final double FEEDER_SPEED = 1.0;
 
     public static final double FLYWHEEL_KP = 0.1;
