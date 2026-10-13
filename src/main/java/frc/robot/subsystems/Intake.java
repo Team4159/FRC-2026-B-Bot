@@ -40,12 +40,15 @@ public class Intake extends SubsystemBase{
     }
 
     //to get values for intake
-    public void slowMoveDown(){
-        angleMotor.setControl(new DutyCycleOut(-0.05));
-    }
-    public void stopAngleMotor(){
-        angleMotor.setControl(new DutyCycleOut(0));
-    }
+    // public void slowMoveDown(){
+    //     angleMotor.setControl(new DutyCycleOut(-0.05));
+    // }
+    // public void slowMoveUp(){
+    //     angleMotor.setControl(new DutyCycleOut(0.05));
+    // }
+    // public void stopAngleMotor(){
+    //     angleMotor.setControl(new DutyCycleOut(0));
+    // }
 
     public void setDown(){
         setAngle(IntakeConstants.ANGLE_DOWN);
@@ -66,17 +69,19 @@ public class Intake extends SubsystemBase{
 
     public void setState(IntakeState state){
         switch (state) {
-            case INTAKE_RUN:
+            case INTAKE_DOWN_RUN:
+                setDown();
                 runRollers();
                 break;
             
-            case INTAKE_STOPRUN:
+            case INTAKE_UP_STOPRUN:
+                setUp();
                 stopRollers();
                 break;
 
-            case INTAKE_DOWN:
-                setDown();
-                break;
+            // case INTAKE_DOWN:
+            //     setDown();
+            //     break;
 
             // case OUTTAKE:
             //     runReverseRollers(); ///not used in container yet

@@ -37,15 +37,15 @@ public final class Constants {
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0;
 
-    public static final double ANGLE_DOWN = 0.0; //place holder plz read dashboard and get down intake angle ;-;
+    public static final double ANGLE_DOWN = 0.4; //place holder plz read dashboard and get down intake angle ;-;
     public static final double ANGLE_UP = 0.25; //idk man, plz read dashboard, i dont have bot w me...
 
     public static final double ROLLER_SPEED = 1.0;
 
     public enum IntakeState {
-      INTAKE_RUN,
-      INTAKE_STOPRUN,
-      INTAKE_DOWN,
+      INTAKE_DOWN_RUN,
+      INTAKE_UP_STOPRUN,
+      // INTAKE_DOWN,
 
       // OUTTAKE
     }

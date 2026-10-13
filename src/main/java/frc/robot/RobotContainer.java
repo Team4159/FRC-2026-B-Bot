@@ -71,10 +71,10 @@ public class RobotContainer {
     //Intake
     m_driverController.leftBumper().whileTrue(
       new RunCommand(
-        () -> m_intake.setState(IntakeState.INTAKE_RUN),
+        () -> m_intake.setState(IntakeState.INTAKE_DOWN_RUN),
         m_intake
       ).finallyDo(
-        () -> m_intake.setState(IntakeState.INTAKE_STOPRUN)
+        () -> m_intake.setState(IntakeState.INTAKE_UP_STOPRUN)
       )
     );
     m_driverController.x().whileTrue(
@@ -87,14 +87,14 @@ public class RobotContainer {
     );
 
     //to get intake angle, not important
-    m_driverController.a().whileTrue(
-      new RunCommand(
-        m_intake::slowMoveDown,
-        m_intake
-      ).finallyDo(
-        m_intake::stopAngleMotor
-      )
-    );
+    // m_driverController.a().whileTrue(
+    //   new RunCommand(
+    //     m_intake::slowMoveDown,
+    //     m_intake
+    //   ).finallyDo(
+    //     m_intake::stopAngleMotor
+    //   )
+    // );
     //outtake not used yet
 
     //shoota (temporary bc no limelight yet)
