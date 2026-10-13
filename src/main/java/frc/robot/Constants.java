@@ -43,8 +43,10 @@ public final class Constants {
     public static final double ROLLER_SPEED = 1.0;
 
     public enum IntakeState {
+      INTAKE_RUN,
+      INTAKE_STOPRUN,
       INTAKE_DOWN,
-      INTAKE_UP
+
       // OUTTAKE
     }
 

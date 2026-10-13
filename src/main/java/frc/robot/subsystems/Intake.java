@@ -39,6 +39,14 @@ public class Intake extends SubsystemBase{
         angleMotor.setControl(angle_request.withPosition(angle));
     }
 
+    //to get values for intake
+    public void slowMoveDown(){
+        angleMotor.setControl(new DutyCycleOut(-0.05));
+    }
+    public void stopAngleMotor(){
+        angleMotor.setControl(new DutyCycleOut(0));
+    }
+
     public void setDown(){
         setAngle(IntakeConstants.ANGLE_DOWN);
     }
@@ -58,12 +66,16 @@ public class Intake extends SubsystemBase{
 
     public void setState(IntakeState state){
         switch (state) {
-            case INTAKE_DOWN:
+            case INTAKE_RUN:
                 runRollers();
                 break;
             
-            case INTAKE_UP:
+            case INTAKE_STOPRUN:
                 stopRollers();
+                break;
+
+            case INTAKE_DOWN:
+                setDown();
                 break;
 
             // case OUTTAKE:
@@ -74,6 +86,6 @@ public class Intake extends SubsystemBase{
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Intake Angle", getAngle());
+        SmartDashboard.putNumber("Intake Angle (rotations)", getAngle());
     }
 }
