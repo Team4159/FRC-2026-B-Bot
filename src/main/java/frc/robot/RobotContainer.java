@@ -101,7 +101,13 @@ public class RobotContainer {
     );
     m_driverController.rightTrigger().whileTrue(
       new RunCommand(
-        m_shooter::runFlywheel,
+        m_shooter::runFlywheelTower,
+        m_shooter
+      ).finallyDo(m_shooter::stopFlywheel)
+    );
+    m_driverController.y().whileTrue( ///should I do y?
+      new RunCommand(
+        m_shooter::runFlyWheelHub,
         m_shooter
       ).finallyDo(m_shooter::stopFlywheel)
     );

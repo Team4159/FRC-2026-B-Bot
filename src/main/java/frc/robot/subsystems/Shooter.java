@@ -45,12 +45,20 @@ public class Shooter extends SubsystemBase{
 
     }
 
-    public void runFlywheel() {
-        flywheelTopLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_SPEED));
-        flywheelBottomLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_SPEED));
-        flywheelTopRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_SPEED));
-        flywheelBottomRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_SPEED));
+    public void runFlywheelTower() {
+        flywheelTopLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
+        flywheelBottomLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
+        flywheelTopRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
+        flywheelBottomRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
     }
+
+    public void runFlyWheelHub() {
+        flywheelTopLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
+        flywheelBottomLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
+        flywheelTopRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
+        flywheelBottomRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
+    }
+
     public void stopFlywheel(){
         flywheelTopLeftMotor.stopMotor();
         flywheelBottomLeftMotor.stopMotor();

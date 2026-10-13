@@ -67,8 +67,8 @@ public final class Constants {
 
     public static final int FEEDER_MOTOR_ID = 14;
 
-
-    public static final double FLYWHEEL_SPEED = 100.0;
+    public static final double FLYWHEEL_TOWER_SPEED = 100.0;
+    public static final double FLYWHEEL_HUB_SPEED = 75.0;
     public static final double FEEDER_SPEED = 1.0;
 
     public static final TalonFXConfiguration FLYWHEEL_CONFIG =
