@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -28,8 +29,19 @@ public class Intake extends SubsystemBase{
         spinMotor = new TalonFX(IntakeConstants.SPIN_MOTOR_ID);
         angleEncoder = new CANcoder(IntakeConstants.ANGLE_ENCODER_ID);
 
+        TalonFXConfiguration ANGLE_CONFIG = IntakeConstants.INTAKE_ANGLE_CONFIG.clone();
+
+        intakeConfigureCurrentLimits(ANGLE_CONFIG);
+
         angleEncoder.getConfigurator().apply(IntakeConstants.ANGLE_CAN_CODER_CONFIG);
-        angleMotor.getConfigurator().apply(IntakeConstants.ANGLE_CONFIG);
+        angleMotor.getConfigurator().apply(ANGLE_CONFIG);
+    }
+
+    private void intakeConfigureCurrentLimits(TalonFXConfiguration config){
+        config.CurrentLimits.StatorCurrentLimit = IntakeConstants.INTAKE_STATOR_CURRENT_LIMIT;
+        config.CurrentLimits.StatorCurrentLimitEnable = true;
+        config.CurrentLimits.SupplyCurrentLimit = IntakeConstants.INTAKE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimitEnable = true;
     }
     
     public double getAngle(){
