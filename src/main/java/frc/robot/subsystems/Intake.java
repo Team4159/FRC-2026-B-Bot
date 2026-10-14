@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -16,7 +17,7 @@ public class Intake extends SubsystemBase{
     private final TalonFX spinMotor;
     private final CANcoder angleEncoder;
 
-    private final PositionVoltage angle_request = new PositionVoltage(0);
+    private final PositionDutyCycle angle_request = new PositionDutyCycle(0);
 
     private final DutyCycleOut roller_request = new DutyCycleOut(0);
 

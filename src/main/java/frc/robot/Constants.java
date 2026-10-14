@@ -28,17 +28,19 @@ public final class Constants {
     public static final int SPIN_MOTOR_ID = 7;
     public static final int ANGLE_ENCODER_ID = 1;
 
-    public static final CANcoderConfiguration ANGLE_CAN_CODER_CONFIG = new CANcoderConfiguration();
+    public static final CANcoderConfiguration ANGLE_CAN_CODER_CONFIG = new CANcoderConfiguration(){{
+      MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.8;
+    }};
     public static final TalonFXConfiguration ANGLE_CONFIG = new TalonFXConfiguration() {{
       MotorOutput.withNeutralMode(NeutralModeValue.Brake);
     }};
 
-    public static final double ANGLE_KP = 1;
+    public static final double ANGLE_KP = 3;
     public static final double ANGLE_KI = 0;
     public static final double ANGLE_KD = 0;
 
-    public static final double ANGLE_DOWN = 0.4; //place holder plz read dashboard and get down intake angle ;-;
-    public static final double ANGLE_UP = 0.25; //idk man, plz read dashboard, i dont have bot w me...
+    public static final double ANGLE_DOWN = 0; //place holder plz read dashboard and get down intake angle ;-;
+    public static final double ANGLE_UP = 0.71337890625; //idk man, plz read dashboard, i dont have bot w me...
 
     public static final double ROLLER_SPEED = 1.0;
 
@@ -54,6 +56,9 @@ public final class Constants {
       ANGLE_CAN_CODER_CONFIG.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
       ANGLE_CONFIG.Feedback.FeedbackRemoteSensorID = ANGLE_ENCODER_ID;
       ANGLE_CONFIG.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RemoteCANcoder;
+      ANGLE_CONFIG.Feedback.RotorToSensorRatio = 25.0;
+      ANGLE_CONFIG.Feedback.SensorToMechanismRatio = 2.0;
+
 
       ANGLE_CONFIG.Slot0.kP = ANGLE_KP;
       ANGLE_CONFIG.Slot0.kI = ANGLE_KI;
