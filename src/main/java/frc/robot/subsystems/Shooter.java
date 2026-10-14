@@ -21,6 +21,8 @@ public class Shooter extends SubsystemBase{
     //im not sure if the velocity is correct, plz change the double
     private final DutyCycleOut feeder_request = new DutyCycleOut(0);
 
+    private static final double STATOR_CURRENT_LIMIT = 80.0;
+    private static final double SUPPLY_CURRENT_LIMIT = 80.0;
 
 
     public Shooter(){
@@ -33,9 +35,11 @@ public class Shooter extends SubsystemBase{
 
         TalonFXConfiguration LEFT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
         LEFT_CONFIG.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
-
         TalonFXConfiguration RIGHT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
         RIGHT_CONFIG.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);
+
+        configureCurrentLimits(RIGHT_CONFIG);
+        configureCurrentLimits(LEFT_CONFIG);
 
         flywheelTopLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelBottomLeftMotor.getConfigurator().apply(LEFT_CONFIG);
@@ -45,20 +49,26 @@ public class Shooter extends SubsystemBase{
 
     }
 
+    private void configureCurrentLimits(TalonFXConfiguration config) {
+        config.CurrentLimits.StatorCurrentLimit = STATOR_CURRENT_LIMIT;
+        config.CurrentLimits.StatorCurrentLimitEnable = true;
+
+        config.CurrentLimits.SupplyCurrentLimit = SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimitEnable = true;
+    }
+
     public void runFlywheelTower() {
         flywheelTopLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
         flywheelBottomLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
         flywheelTopRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
         flywheelBottomRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_TOWER_SPEED));
     }
-
     public void runFlyWheelHub() {
         flywheelTopLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
         flywheelBottomLeftMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
         flywheelTopRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
         flywheelBottomRightMotor.setControl(flywheel_request.withVelocity(ShooterConstants.FLYWHEEL_HUB_SPEED));
     }
-
     public void stopFlywheel(){
         flywheelTopLeftMotor.stopMotor();
         flywheelBottomLeftMotor.stopMotor();

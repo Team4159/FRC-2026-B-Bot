@@ -98,6 +98,7 @@ public class RobotContainer {
     //outtake not used yet
 
     //shoota (temporary bc no limelight yet)
+    //feeder
     m_driverController.rightBumper().whileTrue(
       new RunCommand(
         m_shooter::runFeeder
@@ -109,6 +110,8 @@ public class RobotContainer {
         m_shooter
       ).finallyDo(m_shooter::stopFeeder)
     );
+    
+    //flywheel
     m_driverController.rightTrigger().whileTrue(
       new RunCommand(
         m_shooter::runFlywheelTower,

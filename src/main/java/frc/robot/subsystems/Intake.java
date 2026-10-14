@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase{
 
     public void setReverseRoller(boolean reverse){rollerDirection = reverse ? -1 : 1;}
 
-    //roller kraken x60
+    //roller
     public void runRollers(){
         spinMotor.setControl(roller_request.withOutput(IntakeConstants.ROLLER_SPEED * rollerDirection));
     }

@@ -35,10 +35,6 @@ public final class Constants {
       MotorOutput.withNeutralMode(NeutralModeValue.Brake);
     }};
 
-    public static final double ANGLE_KP = 3;
-    public static final double ANGLE_KI = 0;
-    public static final double ANGLE_KD = 0;
-
     public static final double ANGLE_DOWN = 0; //place holder plz read dashboard and get down intake angle ;-;
     public static final double ANGLE_UP = 0.71337890625; //idk man, plz read dashboard, i dont have bot w me...
 
@@ -48,7 +44,6 @@ public final class Constants {
       INTAKE_DOWN_RUN,
       INTAKE_UP_STOPRUN,
       // INTAKE_DOWN,
-
       // OUTTAKE
     }
 
@@ -60,9 +55,10 @@ public final class Constants {
       ANGLE_CONFIG.Feedback.SensorToMechanismRatio = 2.0;
 
 
-      ANGLE_CONFIG.Slot0.kP = ANGLE_KP;
-      ANGLE_CONFIG.Slot0.kI = ANGLE_KI;
-      ANGLE_CONFIG.Slot0.kD = ANGLE_KD;
+      ANGLE_CONFIG.Slot0.kP = 0.3;
+      ANGLE_CONFIG.Slot0.kI = 0;
+      ANGLE_CONFIG.Slot0.kD = 0;
+      ANGLE_CONFIG.Slot0.kV = 0.1;
     }
   }
 
