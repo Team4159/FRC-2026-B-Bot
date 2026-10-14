@@ -74,7 +74,7 @@ public class RobotContainer {
         () -> m_intake.setState(IntakeState.INTAKE_DOWN_RUN),
         m_intake
       ).finallyDo(
-        () -> m_intake.setState(IntakeState.INTAKE_UP_STOPRUN)
+        () -> m_intake.setState(IntakeState.INTAKE_STOP_RUN)
       )
     );
     m_driverController.x().whileTrue(
@@ -83,6 +83,11 @@ public class RobotContainer {
         m_intake
       ).finallyDo(
         () -> m_intake.setReverseRoller(false)
+      )
+    );
+    m_driverController.povUp().whileTrue(
+      new RunCommand(
+        () -> m_intake.setState(IntakeState.INTAKE_UP)
       )
     );
 

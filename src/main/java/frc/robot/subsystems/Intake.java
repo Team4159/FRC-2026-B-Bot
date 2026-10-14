@@ -75,9 +75,12 @@ public class Intake extends SubsystemBase{
                 runRollers();
                 break;
             
-            case INTAKE_UP_STOPRUN:
-                setUp();
+            case INTAKE_STOP_RUN:
                 stopRollers();
+                break;
+            
+            case INTAKE_UP:
+                setUp();
                 break;
 
             // case INTAKE_DOWN:

@@ -42,7 +42,8 @@ public final class Constants {
 
     public enum IntakeState {
       INTAKE_DOWN_RUN,
-      INTAKE_UP_STOPRUN,
+      INTAKE_STOP_RUN,
+      INTAKE_UP
       // INTAKE_DOWN,
       // OUTTAKE
     }
