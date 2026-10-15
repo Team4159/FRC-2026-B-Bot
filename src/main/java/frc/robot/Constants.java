@@ -41,7 +41,7 @@ public final class Constants {
     }};
 
     public static final double ANGLE_DOWN = 0; //place holder plz read dashboard and get down intake angle ;-;
-    public static final double ANGLE_UP = 0.71337890625; //idk man, plz read dashboard, i dont have bot w me...
+    public static final double ANGLE_UP = 0.71337890625 / 2.0; //idk man, plz read dashboard, i dont have bot w me...
 
     public static final double ROLLER_SPEED = 1.0;
 

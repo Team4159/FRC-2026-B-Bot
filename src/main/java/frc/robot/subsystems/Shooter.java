@@ -35,15 +35,19 @@ public class Shooter extends SubsystemBase{
         TalonFXConfiguration RIGHT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
         RIGHT_CONFIG.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);
 
+        TalonFXConfiguration FEEDER_CONFIG = new TalonFXConfiguration();
+
         shooterConfigureCurrentLimits(RIGHT_CONFIG);
         shooterConfigureCurrentLimits(LEFT_CONFIG);
-
+        
+        shooterConfigureCurrentLimits(FEEDER_CONFIG);
+        
         flywheelTopLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelBottomLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelTopRightMotor.getConfigurator().apply(RIGHT_CONFIG);
         flywheelBottomRightMotor.getConfigurator().apply(RIGHT_CONFIG);
 
-
+        feederMotor.getConfigurator().apply(FEEDER_CONFIG);
     }
 
     private void shooterConfigureCurrentLimits(TalonFXConfiguration config) {

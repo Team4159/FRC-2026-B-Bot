@@ -45,7 +45,7 @@ public class Intake extends SubsystemBase{
     }
     
     public double getAngle(){
-        return angleEncoder.getAbsolutePosition().getValueAsDouble();
+        return angleMotor.getPosition().getValueAsDouble();
     }
 
     public void setAngle(double angle){

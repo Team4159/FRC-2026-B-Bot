@@ -6,10 +6,11 @@ package frc.robot;
 
 import frc.robot.Constants.IntakeConstants.IntakeState;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Autos;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 //subsis :D
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -31,6 +32,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain(m_driverController);
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
+  private final Autos m_autos = new Autos(m_drivetrain, m_shooter);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,8 +63,7 @@ public class RobotContainer {
     m_driverController.back().onTrue(m_drivetrain.zeroDirectionCommand());
     m_driverController.leftTrigger().whileTrue(
       new RunCommand(
-        () -> m_drivetrain.setSlowMode(true),
-        m_drivetrain
+        () -> m_drivetrain.setSlowMode(true)
       ).finallyDo(
         () -> m_drivetrain.setSlowMode(false)
       )
@@ -79,11 +80,16 @@ public class RobotContainer {
     );
     m_driverController.x().whileTrue(
       new RunCommand(
-        () -> m_intake.setReverseRoller(true),
-        m_intake
-      ).finallyDo(
-        () -> m_intake.setReverseRoller(false)
-      )
+        () -> {
+          m_intake.setReverseRoller(true);
+          m_intake.runRollers();
+        }, 
+        m_intake).finallyDo(
+          () -> {
+            m_intake.setReverseRoller(false);
+            m_intake.stopRollers();
+          }
+        )
     );
     m_driverController.povUp().whileTrue(
       new RunCommand(
@@ -111,8 +117,7 @@ public class RobotContainer {
     );
     m_driverController.b().whileTrue(
       new RunCommand(
-        m_shooter::runRevereseFeeder,
-        m_shooter
+        m_shooter::runRevereseFeeder
       ).finallyDo(m_shooter::stopFeeder)
     );
     
@@ -141,6 +146,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null;
+    return m_autos.driveAndShoot().cmd();
   }
 }
