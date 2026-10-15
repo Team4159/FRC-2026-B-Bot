@@ -122,13 +122,13 @@ public class RobotContainer {
     );
     
     //flywheel
-    m_driverController.rightTrigger().whileTrue(
+    m_driverController.y().whileTrue(
       new RunCommand(
         m_shooter::runFlywheelTower,
         m_shooter
       ).finallyDo(m_shooter::stopFlywheel)
     );
-    m_driverController.y().whileTrue( ///should I do y?
+    m_driverController.rightTrigger().whileTrue( ///should I do y?
       new RunCommand(
         m_shooter::runFlyWheelHub,
         m_shooter
