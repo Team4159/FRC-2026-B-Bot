@@ -32,7 +32,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain(m_driverController);
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
-  private final Autos m_autos = new Autos(m_drivetrain, m_shooter);
+  private final Autos m_autos = new Autos(m_drivetrain, m_shooter, m_intake);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
