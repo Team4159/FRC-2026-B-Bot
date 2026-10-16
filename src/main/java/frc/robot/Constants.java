@@ -34,14 +34,15 @@ public final class Constants {
     public static final int ANGLE_ENCODER_ID = 1;
 
     public static final CANcoderConfiguration ANGLE_CAN_CODER_CONFIG = new CANcoderConfiguration(){{
-      MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.8;
+      MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.9;
+      MagnetSensor.MagnetOffset = -0.15;
     }};
     public static final TalonFXConfiguration INTAKE_ANGLE_CONFIG = new TalonFXConfiguration() {{
       MotorOutput.withNeutralMode(NeutralModeValue.Brake);
     }};
 
     public static final double ANGLE_DOWN = 0; //place holder plz read dashboard and get down intake angle ;-;
-    public static final double ANGLE_UP = 0.71337890625 / 2.0; //idk man, plz read dashboard, i dont have bot w me...
+    public static final double ANGLE_UP = 0.8 / 2.0; //idk man, plz read dashboard, i dont have bot w me...
 
     public static final double ROLLER_SPEED = 1.0;
 
@@ -64,11 +65,9 @@ public final class Constants {
       INTAKE_ANGLE_CONFIG.Feedback.SensorToMechanismRatio = 2.0;
 
 
-      INTAKE_ANGLE_CONFIG.Slot0.kP = 0.3;
+      INTAKE_ANGLE_CONFIG.Slot0.kP = 2;
       INTAKE_ANGLE_CONFIG.Slot0.kI = 0;
-      INTAKE_ANGLE_CONFIG.Slot0.kD = 0;
-      INTAKE_ANGLE_CONFIG.Slot0.kV = 0.1;
-    }
+      INTAKE_ANGLE_CONFIG.Slot0.kD = 0;    }
   }
 
   public static class ShooterConstants {
