@@ -15,10 +15,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 
 public class Autos {
     private final AutoFactory factory;
+    private final Drivetrain drivetrain;
     private final Shooter shooter;
     private final Intake intake;
 
     public Autos(Drivetrain drivetrain, Shooter shooter, Intake intake) {
+        this.drivetrain = drivetrain;
         this.shooter = shooter;
         this.intake = intake;
         factory = new AutoFactory(
@@ -35,12 +37,10 @@ public class Autos {
         AutoTrajectory path2 = routine.trajectory("ShootToDepot");
 
         routine.active().onTrue(Commands.sequence(
-            path1.resetOdometry(), 
-            path1.cmd(), 
-            shoot(),
-            path2.cmd(),
-            intake()
-        ));
+                Commands.print("test"),
+                path1.resetOdometry(),
+                path1.cmd(),
+                shoot()));
         // path.done().onTrue(shoot());
 
         return routine;
@@ -48,6 +48,7 @@ public class Autos {
 
     private Command shoot() {
         return Commands.sequence(
+                Commands.runOnce(drivetrain::stop),
                 Commands.runOnce(shooter::runFlywheelTower, shooter),
                 Commands.waitSeconds(1.5),
                 Commands.runOnce(shooter::runFeeder),
@@ -58,13 +59,12 @@ public class Autos {
                 }));
     }
 
-    private Command intake(){
+    private Command intake() {
         return Commands.sequence(
-            Commands.runOnce(intake::setDown, intake),
-            Commands.waitSeconds(0.5),
-            Commands.runOnce(intake::runRollers, intake),
-            Commands.waitSeconds(5.0),
-            Commands.runOnce(intake::stopRollers, intake)
-        );
+                Commands.runOnce(intake::setDown, intake),
+                Commands.waitSeconds(0.5),
+                Commands.runOnce(intake::runRollers, intake),
+                Commands.waitSeconds(5.0),
+                Commands.runOnce(intake::stopRollers, intake));
     }
 }

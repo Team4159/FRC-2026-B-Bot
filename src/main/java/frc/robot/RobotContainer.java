@@ -60,6 +60,7 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     //drivetrain
+    m_drivetrain.seedFieldCentric();
     m_driverController.back().onTrue(m_drivetrain.zeroDirectionCommand());
     m_driverController.leftTrigger().whileTrue(
       new RunCommand(

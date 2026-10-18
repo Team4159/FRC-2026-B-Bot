@@ -77,12 +77,17 @@ public class Shooter extends SubsystemBase{
     }
 
     public void runFeeder(){
+        System.out.println("RUN");
         feederMotor.setControl(feeder_request.withOutput(ShooterConstants.FEEDER_SPEED));
     }
     public void runRevereseFeeder(){
+                System.out.println("RUN REVERSE");
+
         feederMotor.setControl(feeder_request.withOutput(-ShooterConstants.FEEDER_SPEED));
     }
     public void stopFeeder(){
+                System.out.println("STOP");
+
         feederMotor.stopMotor();
     }
 }
