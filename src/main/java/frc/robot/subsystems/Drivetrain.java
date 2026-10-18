@@ -25,6 +25,9 @@ public class Drivetrain extends CommandSwerveDrivetrain {
 
     private double speedMultiplier = 1.0;
 
+    //nice one
+    private double useless = 0.0;
+
     // for choreo
     private final PIDController xController = new PIDController(10, 0, 0);
     private final PIDController yController = new PIDController(10, 0, 0);
