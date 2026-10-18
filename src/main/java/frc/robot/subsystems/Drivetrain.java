@@ -85,6 +85,15 @@ public class Drivetrain extends CommandSwerveDrivetrain {
         });
     }
 
+    public Command driveWithVelocity(double x, double y){
+        return run(() -> {
+            setControl(fieldCentricDrive
+                    .withVelocityX(x * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
+                    .withVelocityY(y * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
+                    .withRotationalRate(0));
+        });
+    }
+
     public void stop() {
         setControl(fieldCentricDrive.withVelocityX(0)
                 .withVelocityY(0)
