@@ -60,7 +60,6 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     //drivetrain
-    m_drivetrain.seedFieldCentric();
     m_driverController.back().onTrue(m_drivetrain.zeroDirectionCommand());
     m_driverController.leftTrigger().whileTrue(
       new RunCommand(
@@ -84,7 +83,7 @@ public class RobotContainer {
         () -> {
           m_intake.setReverseRoller(true);
           m_intake.runRollers();
-        }, 
+        },
         m_intake).finallyDo(
           () -> {
             m_intake.setReverseRoller(false);
@@ -121,7 +120,7 @@ public class RobotContainer {
         m_shooter::runRevereseFeeder
       ).finallyDo(m_shooter::stopFeeder)
     );
-    
+
     //flywheel
     m_driverController.y().whileTrue(
       new RunCommand(
