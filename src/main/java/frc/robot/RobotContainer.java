@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.IntakeConstants.IntakeState;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Autos;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -32,7 +33,8 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain(m_driverController);
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
-  private final Autos m_autos = new Autos(m_drivetrain, m_shooter, m_intake);
+  // private final Autos m_autos = new Autos(m_drivetrain, m_shooter, m_intake);
+  private final AutoShoot m_autoshoot = new AutoShoot(m_shooter, m_drivetrain);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -60,7 +62,6 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     //drivetrain
-    m_drivetrain.seedFieldCentric();
     m_driverController.back().onTrue(m_drivetrain.zeroDirectionCommand());
     m_driverController.leftTrigger().whileTrue(
       new RunCommand(
@@ -84,7 +85,7 @@ public class RobotContainer {
         () -> {
           m_intake.setReverseRoller(true);
           m_intake.runRollers();
-        }, 
+        },
         m_intake).finallyDo(
           () -> {
             m_intake.setReverseRoller(false);
@@ -121,7 +122,7 @@ public class RobotContainer {
         m_shooter::runRevereseFeeder
       ).finallyDo(m_shooter::stopFeeder)
     );
-    
+
     //flywheel
     m_driverController.y().whileTrue(
       new RunCommand(
@@ -147,6 +148,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return m_autos.driveAndShoot().cmd();
+    return m_autoshoot.autoShoot();
   }
 }

@@ -28,20 +28,20 @@ public class Shooter extends SubsystemBase{
         flywheelTopRightMotor = new TalonFX(ShooterConstants.FLYWHEEL_MOTOR_TOP_RIGHT_ID);
         flywheelBottomRightMotor = new TalonFX(ShooterConstants.FLYWHEEL_MOTOR_BOTTOM_RIGHT_ID);
 
-        feederMotor = new TalonFX(ShooterConstants.FEEDER_MOTOR_ID); 
+        feederMotor = new TalonFX(ShooterConstants.FEEDER_MOTOR_ID);
 
         TalonFXConfiguration LEFT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
-        LEFT_CONFIG.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
+        LEFT_CONFIG.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);
         TalonFXConfiguration RIGHT_CONFIG = ShooterConstants.FLYWHEEL_CONFIG.clone();
-        RIGHT_CONFIG.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);
+        RIGHT_CONFIG.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
 
         TalonFXConfiguration FEEDER_CONFIG = new TalonFXConfiguration();
 
         shooterConfigureCurrentLimits(RIGHT_CONFIG);
         shooterConfigureCurrentLimits(LEFT_CONFIG);
-        
+
         shooterConfigureCurrentLimits(FEEDER_CONFIG);
-        
+
         flywheelTopLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelBottomLeftMotor.getConfigurator().apply(LEFT_CONFIG);
         flywheelTopRightMotor.getConfigurator().apply(RIGHT_CONFIG);
@@ -77,17 +77,12 @@ public class Shooter extends SubsystemBase{
     }
 
     public void runFeeder(){
-        System.out.println("RUN");
-        feederMotor.setControl(feeder_request.withOutput(ShooterConstants.FEEDER_SPEED));
-    }
-    public void runRevereseFeeder(){
-                System.out.println("RUN REVERSE");
-
         feederMotor.setControl(feeder_request.withOutput(-ShooterConstants.FEEDER_SPEED));
     }
+    public void runRevereseFeeder(){
+        feederMotor.setControl(feeder_request.withOutput(ShooterConstants.FEEDER_SPEED));
+    }
     public void stopFeeder(){
-                System.out.println("STOP");
-
         feederMotor.stopMotor();
     }
 }

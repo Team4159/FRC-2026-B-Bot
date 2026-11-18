@@ -34,7 +34,7 @@ public class Autos {
     public AutoRoutine driveAndShoot() {
         AutoRoutine routine = factory.newRoutine("driveAndShoot");
         AutoTrajectory path1 = routine.trajectory("StartToShoot"); // file name add later idk what to do for it lwk
-        AutoTrajectory path2 = routine.trajectory("ShootToDepot");
+        // AutoTrajectory path2 = routine.trajectory("ShootToDepot");
 
         routine.active().onTrue(Commands.sequence(
                 Commands.print("test"),
@@ -48,15 +48,17 @@ public class Autos {
 
     private Command shoot() {
         return Commands.sequence(
-                Commands.runOnce(drivetrain::stop),
-                Commands.runOnce(shooter::runFlywheelTower, shooter),
-                Commands.waitSeconds(1.5),
-                Commands.runOnce(shooter::runFeeder),
-                Commands.waitSeconds(5.0),
-                Commands.runOnce(() -> {
-                    shooter.stopFeeder();
-                    shooter.stopFlywheel();
-                }));
+            Commands.runOnce(drivetrain::zeroDirectionCommand, drivetrain),
+            Commands.runOnce(drivetrain::stop, drivetrain),
+            Commands.runOnce(() -> {
+                shooter.runFeeder();
+                shooter.runFlywheelTower();
+            }),
+            Commands.waitSeconds(5.0),
+            Commands.runOnce(() -> {
+                shooter.stopFeeder();
+                shooter.stopFlywheel();
+            }));
     }
 
     private Command intake() {

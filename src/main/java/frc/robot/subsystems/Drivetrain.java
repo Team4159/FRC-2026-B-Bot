@@ -25,6 +25,9 @@ public class Drivetrain extends CommandSwerveDrivetrain {
 
     private double speedMultiplier = 1.0;
 
+    //nice one
+    private double useless = 0.0;
+
     // for choreo
     private final PIDController xController = new PIDController(10, 0, 0);
     private final PIDController yController = new PIDController(10, 0, 0);
@@ -79,6 +82,15 @@ public class Drivetrain extends CommandSwerveDrivetrain {
                     .withVelocityY(inputY.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
                     .withRotationalRate(inputRotation.get() * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude()
                             * speedMultiplier));
+        });
+    }
+
+    public Command driveWithVelocity(double x, double y){
+        return run(() -> {
+            setControl(fieldCentricDrive
+                    .withVelocityX(x * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
+                    .withVelocityY(y * TunerConstants.kSpeedAt12Volts.baseUnitMagnitude() * speedMultiplier)
+                    .withRotationalRate(0));
         });
     }
 
