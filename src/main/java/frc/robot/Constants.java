@@ -80,7 +80,7 @@ public final class Constants {
 
     public static final double FLYWHEEL_TOWER_SPEED = 100.0;
     public static final double FLYWHEEL_HUB_SPEED = 75.0;
-    public static final double FEEDER_SPEED = 1.0;
+    public static final double FEEDER_SPEED = 2.0;
 
     public static final double SHOOTER_STATOR_CURRENT_LIMIT = 60.0;
     public static final double SHOOTER_SUPPLY_CURRENT_LIMIT = 30.0;
